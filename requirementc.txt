@@ -1,0 +1,2 @@
+streamlit==0.71.0
+py-avataaars==1.0.2
