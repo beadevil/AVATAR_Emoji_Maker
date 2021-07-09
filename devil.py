@@ -13,7 +13,6 @@ if st.button("Credits"):
     st.markdown("""
 **Credits**
 - App built in `Python` + `Streamlit` by [Mayukh Bhaumik](https://www.facebook.com/profile.php?id=100008465223907),[Gaurab Sarkar](https://www.facebook.com/profile.php?id=100005271167430),[Debnarayan Mondal](https://www.facebook.com/profile.php?id=100064660923457),[Neelsekhar Mandal](https://www.facebook.com/neelsekhar.mandal)
-- App inspired by the [avataaars generator](https://getavataaars.com) by [Fang-Pen Lin](https://twitter.com/fangpenlin)
 - Built with [py_avataaars](https://pypi.org/project/py-avataaars/) library
 ---
 """)
