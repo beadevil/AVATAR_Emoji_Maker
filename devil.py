@@ -4,10 +4,6 @@ from PIL import Image
 import base64
 from random import randrange
 
-from deepface import DeepFace
-if st.button("open"):
-    DeepFace.stream("devil")
-
 
 
 # Page title
