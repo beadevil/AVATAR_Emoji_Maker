@@ -5,7 +5,7 @@ import base64
 from random import randrange
 
 from deepface import DeepFace
-st.button("open"):
+if st.button("open"):
     DeepFace.stream("devil")
 
 
