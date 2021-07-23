@@ -10,3 +10,4 @@ matplotlib-inline==0.1.2
 numpy==1.19.5
 tensorflow==2.5.0
 keras-nightly==2.5.0.dev2021032900
+tensorflow-estimator==2.5.0
