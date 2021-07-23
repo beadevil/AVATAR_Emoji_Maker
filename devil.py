@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import emoji
 from tensorflow.keras import models
-
+from tensorflow import keras
 
 
 # Page title
