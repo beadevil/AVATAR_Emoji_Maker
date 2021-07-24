@@ -3,6 +3,16 @@ import py_avataaars as pa
 from PIL import Image
 import base64
 from random import randrange
+from keras.models import load_model
+from time import sleep
+
+from keras.preprocessing import image
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import emoji
+from tensorflow.keras import models
+from tensorflow import keras
 
 # Page title
 st.markdown("""
@@ -171,3 +181,70 @@ rendered_avatar = avatar.render_png_file('avatar.png')
 image = Image.open('avatar.png')
 st.image(image)
 st.markdown(imagedownload('avatar.png'), unsafe_allow_html=True)
+
+if st.button('CAMERA'):
+    cam = cv2.VideoCapture(0)
+    cv2.namedWindow("test")
+
+    while True:
+        ret, frame = cam.read()
+        if not ret:
+            print("failed to grab frame")
+            break
+        cv2.imshow("test", frame)
+
+        k = cv2.waitKey(1)
+        if k%256 == 32:
+            # SPACE pressed
+            cv2.imwrite('img_name.png', frame)
+            print("CAPTURD")
+            break
+
+    cam.release()
+    cv2.destroyAllWindows()
+
+    img=cv2.imread("img_name.png")
+
+    face_classifier = cv2.CascadeClassifier(r'C:\Users\DEVIL\Music\Emotion_Detection_CNN-main\Emotion_Detection_CNN-main\haarcascade_frontalface_default.xml')
+    classifier =load_model(r'C:\Users\DEVIL\Music\Emotion_Detection_CNN-main\Emotion_Detection_CNN-main\model.h5')
+    emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
+
+    labels = []
+    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    faces = face_classifier.detectMultiScale(gray)
+
+    for (x,y,w,h) in faces:
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,255),2)
+        roi_gray = gray[y:y+h,x:x+w]
+        roi_gray = cv2.resize(roi_gray,(48,48),interpolation=cv2.INTER_AREA)
+
+        if np.sum([roi_gray])!=0:
+            roi = roi_gray.astype('float')/255.0
+            roi = img_to_array(roi)
+            roi = np.expand_dims(roi,axis=0)
+
+            prediction = classifier.predict(roi)[0]
+            label=emotion_labels[prediction.argmax()]
+            labels.append(label)
+            label_position = (x,y)
+            cv2.putText(frame,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
+        else:
+            cv2.putText(frame,'No Faces',(30,80),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
+    plt.imshow(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB))
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.pyplot()
+    for i in labels:
+        if i=='Angry':
+            st.write(emoji.emojize(":angry_face:"))
+        if i=='Disgust':
+            st.write(emoji.emojize(":weary_face:"))
+        if i=='Fear':
+            st.write(emoji.emojize(":face_screaming_in_fear:"))
+        if i=='Happy':
+            st.write(emoji.emojize(":grinning_face:"))
+        if i=='Neutral':
+            st.write(emoji.emojize(":neutral_face:"))
+        if i=='Sad':
+            st.write(emoji.emojize(":sad_but_relieved_face:"))
+        if i=='Surprise':
+            st.write(emoji.emojize(":face_screaming_in_fear:"))
