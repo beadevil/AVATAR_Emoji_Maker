@@ -205,8 +205,8 @@ if st.button('CAMERA'):
 
     img=cv2.imread("img_name.png")
 
-    face_classifier = cv2.CascadeClassifier(r'streamlit/haarcascade_frontalface_default.xml')
-    classifier =load_model(r'streamlit/model.h5')
+    face_classifier = cv2.CascadeClassifier(https://github.com/beadevil/streamlit/haarcascade_frontalface_default.xml)
+    classifier =load_model(https://github.com/beadevil/streamlit/streamlit/model.h5)
     emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
 
     labels = []
