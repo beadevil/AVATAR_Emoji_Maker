@@ -3,7 +3,7 @@ import py_avataaars as pa
 from PIL import Image
 import base64
 from random import randrange
-import opencv
+import python-opencv
 
 # Page title
 st.markdown("""
