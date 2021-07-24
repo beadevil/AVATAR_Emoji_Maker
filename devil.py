@@ -7,7 +7,7 @@ from random import randrange
 from time import sleep
 
 
-import cv2
+from cv2  import *
 import numpy as np
 import matplotlib.pyplot as plt
 import emoji
