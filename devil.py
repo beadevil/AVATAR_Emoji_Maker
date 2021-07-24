@@ -182,7 +182,7 @@ rendered_avatar = avatar.render_png_file('avatar.png')
 image = Image.open('avatar.png')
 st.image(image)
 st.markdown(imagedownload('avatar.png'), unsafe_allow_html=True)
-
+"""
 if st.button('CAMERA'):
     cam = cv2.VideoCapture(0)
     cv2.namedWindow("test")
