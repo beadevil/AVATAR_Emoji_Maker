@@ -7,7 +7,7 @@ from random import randrange
 
 from time import sleep
 
-from keras.preprocessing import image
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
