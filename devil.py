@@ -1,3 +1,4 @@
+
 import streamlit as st
 import py_avataaars as pa
 from PIL import Image
@@ -156,16 +157,16 @@ avatar = pa.PyAvataaar(
     skin_color=eval('pa.SkinColor.%s' % option_skin_color),
     top_type=eval('pa.TopType.SHORT_HAIR_SHORT_FLAT.%s' % option_top_type),
     hair_color=eval('pa.HairColor.%s' % option_hair_color),
-    hat_color=eval('pa.ClotheColor.%s' % option_hat_color),
+    hat_color=eval('pa.Color.%s' % option_hat_color),
     facial_hair_type=eval('pa.FacialHairType.%s' % option_facial_hair_type),
-    facial_hair_color=eval('pa.FacialHairColor.%s' % option_facial_hair_color),
+    facial_hair_color=eval('pa.HairColor.%s' % option_facial_hair_color),
     mouth_type=eval('pa.MouthType.%s' % option_mouth_type),
     eye_type=eval('pa.EyesType.%s' % option_eye_type),
     eyebrow_type=eval('pa.EyebrowType.%s' % option_eyebrow_type),
     nose_type=pa.NoseType.DEFAULT,
     accessories_type=eval('pa.AccessoriesType.%s' % option_accessories_type),
     clothe_type=eval('pa.ClotheType.%s' % option_clothe_type),
-    clothe_color=eval('pa.ClotheColor.%s' % option_clothe_color),
+    clothe_color=eval('pa.Color.%s' % option_clothe_color),
     clothe_graphic_type=eval('pa.ClotheGraphicType.%s' %option_clothe_graphic_type)
 )
 
@@ -205,8 +206,8 @@ if st.button('CAMERA'):
 
     img=cv2.imread("img_name.png")
 
-    face_classifier = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
-    classifier =load_model(r'model.h5')
+    face_classifier = cv2.CascadeClassifier(r'C:\Users\DEVIL\Music\Emotion_Detection_CNN-main\Emotion_Detection_CNN-main\haarcascade_frontalface_default.xml')
+    classifier =load_model(r'C:\Users\DEVIL\Music\Emotion_Detection_CNN-main\Emotion_Detection_CNN-main\model.h5')
     emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
 
     labels = []
@@ -248,4 +249,3 @@ if st.button('CAMERA'):
             st.write(emoji.emojize(":sad_but_relieved_face:"))
         if i=='Surprise':
             st.write(emoji.emojize(":face_screaming_in_fear:"))
-    
