@@ -1,31 +1,20 @@
-
 import streamlit as st
 import py_avataaars as pa
 from PIL import Image
 import base64
 from random import randrange
 
-from time import sleep
-
-
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-import emoji
-from tensorflow.keras import models
-from tensorflow import keras
-
-
 # Page title
-st.write("""# Emoji Maker
-This app allows you to build your own custom Emoji.
-""")
+st.markdown("""
+# Avatar Maker
 
-if st.button("Credits"):
-    st.markdown("""
+This app allows you to build your own custom avatars based on modular templates provided herein.
+
 **Credits**
-- App built in `Python` + `Streamlit` by [Mayukh Bhaumik](https://www.facebook.com/profile.php?id=100008465223907),[Gaurab Sarkar](https://www.facebook.com/profile.php?id=100005271167430),[Debnarayan Mondal](https://www.facebook.com/profile.php?id=100064660923457),[Neelsekhar Mandal](https://www.facebook.com/neelsekhar.mandal)
-- Built with [py_avataaars](https://pypi.org/project/py-avataaars/) library
+- App built in `Python` + `Streamlit` by [Chanin Nantasenamat](https://medium.com/@chanin.nantasenamat) (aka [Data Professor](http://youtube.com/dataprofessor))
+- App inspired by the [avataaars generator](https://getavataaars.com) by [Fang-Pen Lin](https://twitter.com/fangpenlin)
+- Built with [py_avataaars](https://pypi.org/project/py-avataaars/) library by [Krzysztof Ebert](https://github.com/kebu)
+- Avatar is based on Sketch library [Avataaars](https://avataaars.com) designed by [Pablo Stanley](https://twitter.com/pablostanley).
 ---
 """)
 
@@ -157,16 +146,16 @@ avatar = pa.PyAvataaar(
     skin_color=eval('pa.SkinColor.%s' % option_skin_color),
     top_type=eval('pa.TopType.SHORT_HAIR_SHORT_FLAT.%s' % option_top_type),
     hair_color=eval('pa.HairColor.%s' % option_hair_color),
-    hat_color=eval('pa.Color.%s' % option_hat_color),
+    hat_color=eval('pa.ClotheColor.%s' % option_hat_color),
     facial_hair_type=eval('pa.FacialHairType.%s' % option_facial_hair_type),
-    facial_hair_color=eval('pa.HairColor.%s' % option_facial_hair_color),
+    facial_hair_color=eval('pa.FacialHairColor.%s' % option_facial_hair_color),
     mouth_type=eval('pa.MouthType.%s' % option_mouth_type),
     eye_type=eval('pa.EyesType.%s' % option_eye_type),
     eyebrow_type=eval('pa.EyebrowType.%s' % option_eyebrow_type),
     nose_type=pa.NoseType.DEFAULT,
     accessories_type=eval('pa.AccessoriesType.%s' % option_accessories_type),
     clothe_type=eval('pa.ClotheType.%s' % option_clothe_type),
-    clothe_color=eval('pa.Color.%s' % option_clothe_color),
+    clothe_color=eval('pa.ClotheColor.%s' % option_clothe_color),
     clothe_graphic_type=eval('pa.ClotheGraphicType.%s' %option_clothe_graphic_type)
 )
 
@@ -177,3 +166,8 @@ def imagedownload(filename):
     href = f'<a href="data:image/png;base64,{b64}" download={filename}>Download {filename} File</a>'
     return href
 
+st.subheader('**Rendered Avatar**')
+rendered_avatar = avatar.render_png_file('avatar.png')
+image = Image.open('avatar.png')
+st.image(image)
+st.markdown(imagedownload('avatar.png'), unsafe_allow_html=True)
