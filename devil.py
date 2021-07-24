@@ -249,3 +249,4 @@ if st.button('CAMERA'):
             st.write(emoji.emojize(":sad_but_relieved_face:"))
         if i=='Surprise':
             st.write(emoji.emojize(":face_screaming_in_fear:"))
+"""
